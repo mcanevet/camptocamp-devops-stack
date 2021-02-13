@@ -9,6 +9,8 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
 
 apps:
   aad-pod-identity:
@@ -19,6 +21,8 @@ apps:
     enabled: true
   cert-manager:
     enabled: true
+  contour:
+    enabled: false
   csi-secrets-store-provider-azure:
     enabled: false
   efs-provisioner:
@@ -99,6 +103,8 @@ argo-cd:
       scopes: '[groups, cognito:groups, roles]'
 
 cert-manager: {}
+
+contour: {}
 
 efs-provisioner: {}
 

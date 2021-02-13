@@ -7,6 +7,15 @@ module "cluster" {
   repo_url        = var.repo_url
   target_revision = var.target_revision
 
+  app_of_apps_values_overrides = <<EOT
+---
+apps:
+  contour:
+    enabled: true
+  traefik:
+    enabled: false
+  EOT
+
   extra_apps = [
     {
       metadata = {

@@ -1,0 +1,27 @@
+{{- if index $.Values "apps" "contour" "enabled" }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-3"
+  name: contour
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: argocd/contour
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+    helm:
+      values: |
+        contour:
+          {{- index .Values "contour" | toYaml | nindent 10 }}
+  destination:
+    namespace: contour
+    server: {{ .Values.spec.destination.server }}
+  {{- if .Values.spec.syncPolicy }}
+  syncPolicy:
+    {{ toYaml .Values.spec.syncPolicy | nindent 4 }}
+  {{- end }}
+{{- end }}
