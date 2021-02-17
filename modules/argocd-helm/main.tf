@@ -55,46 +55,110 @@ resource "jwt_hashed_token" "argocd" {
   claims_json = jsonencode(local.jwt_token_payload)
 }
 
-resource "helm_release" "app_of_apps" {
-  name              = "app-of-apps"
-  chart             = "${path.module}/../../argocd/app-of-apps"
-  namespace         = "argocd"
-  dependency_update = true
-  create_namespace  = true
+resource "argocd_application" "app_of_apps" {
+  metadata {
+    name      = "apps"
+    namespace = "argocd"
 
-  values = concat([
-    templatefile("${path.module}/../../argocd/app-of-apps/values.tmpl.yaml",
-      {
-        repo_url                        = var.repo_url
-        target_revision                 = var.target_revision
-        argocd_accounts_pipeline_tokens = local.argocd_accounts_pipeline_tokens
-        extra_apps                      = var.extra_apps
-        cluster_name                    = var.cluster_name
-        base_domain                     = var.base_domain
-        cluster_issuer                  = var.cluster_issuer
-        oidc                            = local.oidc
-        cookie_secret                   = random_password.oauth2_cookie_secret.result
-        minio                           = local.minio
-        loki                            = local.loki
-        efs_provisioner                 = local.efs_provisioner
-        argocd                          = local.argocd
-        keycloak                        = local.keycloak
-        grafana                         = local.grafana
-        prometheus                      = local.prometheus
-        alertmanager                    = local.alertmanager
-        metrics_archives                = local.metrics_archives
+    annotations = {
+      "argocd.argoproj.io/sync-wave" = 5
+    }
+  }
+
+  spec {
+    destination {
+      namespace = "default"
+      server    = "https://kubernetes.default.svc"
+    }
+
+    source {
+      repo_url        = var.repo_url
+      path            = "argocd/apps"
+      target_revision = var.target_revision
+
+      # TODO: How to pass values_overrides???
+      helm {
+        values = templatefile("${path.module}/../../argocd/app-of-apps/values.tmpl.yaml",
+          {
+            repo_url                        = var.repo_url
+            target_revision                 = var.target_revision
+            argocd_accounts_pipeline_tokens = local.argocd_accounts_pipeline_tokens
+            extra_apps                      = var.extra_apps
+            cluster_name                    = var.cluster_name
+            base_domain                     = var.base_domain
+            cluster_issuer                  = var.cluster_issuer
+            oidc                            = local.oidc
+            cookie_secret                   = random_password.oauth2_cookie_secret.result
+            minio                           = local.minio
+            loki                            = local.loki
+            efs_provisioner                 = local.efs_provisioner
+            argocd                          = local.argocd
+            keycloak                        = local.keycloak
+            grafana                         = local.grafana
+            prometheus                      = local.prometheus
+            alertmanager                    = local.alertmanager
+            metrics_archives                = local.metrics_archives
+          }
+        )
       }
-    )],
-    var.app_of_apps_values_overrides,
-  )
+    }
+
+    project = "default"
+
+    sync_policy {
+      automated = {
+        prune     = true
+        self_heal = true
+      }
+    }
+  }
+
+  wait = true
 
   depends_on = [
     helm_release.argocd
   ]
 }
 
+# resource "helm_release" "app_of_apps" {
+#   name              = "app-of-apps"
+#   chart             = "${path.module}/../../argocd/app-of-apps"
+#   namespace         = "argocd"
+#   dependency_update = true
+#   create_namespace  = true
+
+#   values = concat([
+#     templatefile("${path.module}/../../argocd/app-of-apps/values.tmpl.yaml",
+#       {
+#         repo_url                        = var.repo_url
+#         target_revision                 = var.target_revision
+#         argocd_accounts_pipeline_tokens = local.argocd_accounts_pipeline_tokens
+#         extra_apps                      = var.extra_apps
+#         cluster_name                    = var.cluster_name
+#         base_domain                     = var.base_domain
+#         cluster_issuer                  = var.cluster_issuer
+#         oidc                            = local.oidc
+#         cookie_secret                   = random_password.oauth2_cookie_secret.result
+#         minio                           = local.minio
+#         loki                            = local.loki
+#         efs_provisioner                 = local.efs_provisioner
+#         argocd                          = local.argocd
+#         keycloak                        = local.keycloak
+#         grafana                         = local.grafana
+#         prometheus                      = local.prometheus
+#         alertmanager                    = local.alertmanager
+#         metrics_archives                = local.metrics_archives
+#       }
+#     )],
+#     var.app_of_apps_values_overrides,
+#   )
+
+#   depends_on = [
+#     helm_release.argocd
+#   ]
+# }
+
 resource "random_password" "oauth2_cookie_secret" {
   length  = 16
   special = false
 }
-

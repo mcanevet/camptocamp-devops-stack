@@ -14,7 +14,3 @@ output "repo_url" {
 output "target_revision" {
   value = var.target_revision
 }
-
-output "app_of_apps_values" {
-  value = module.argocd.app_of_apps_values
-}

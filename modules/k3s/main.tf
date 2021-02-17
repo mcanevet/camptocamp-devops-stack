@@ -28,6 +28,14 @@ provider "kubernetes" {
   cluster_ca_certificate = local.kubernetes_cluster_ca_certificate
 }
 
+provider "argocd" {
+  server_addr                 = "127.0.0.1:8080"
+  auth_token                  = module.argocd.argocd_auth_token
+  plain_text                  = true
+  port_forward                = true
+  port_forward_with_namespace = "argocd"
+}
+
 module "argocd" {
   source = "../../argocd-helm"
 

@@ -20,11 +20,6 @@ output "target_revision" {
   value = module.cluster.target_revision
 }
 
-output "app_of_apps_values" {
-  sensitive = true
-  value     = module.cluster.app_of_apps_values
-}
-
 output "argocd_url" {
   value = format("https://argocd.apps.%s", module.cluster.base_domain)
 }
