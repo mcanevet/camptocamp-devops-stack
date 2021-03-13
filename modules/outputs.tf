@@ -32,3 +32,11 @@ output "grafana_admin_password" {
 output "app_of_apps_values" {
   value = module.argocd.app_of_apps_values
 }
+
+output "app_of_apps_values_local" {
+  value = module.argocd.app_of_apps_values_local
+}
+
+output "argocd_values" {
+  value = module.argocd.argocd_values
+}

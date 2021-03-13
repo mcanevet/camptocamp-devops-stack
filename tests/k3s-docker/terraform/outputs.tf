@@ -58,3 +58,11 @@ output "grafana_admin_password" {
   sensitive = true
   value     = module.cluster.grafana_admin_password
 }
+
+output "app_of_apps_values_local" {
+  value = module.cluster.app_of_apps_values_local
+}
+
+output "argocd_values" {
+  value = module.cluster.argocd_values
+}

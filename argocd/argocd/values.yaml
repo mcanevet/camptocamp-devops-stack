@@ -10,6 +10,10 @@ argo-cd:
       argocdServerAdminPasswordMtime: '2020-07-23T11:31:23Z'
   controller:
     metrics:
+      service:
+        labels:
+          meta.helm.sh/release-name: argocd
+          meta.helm.sh/release-namespace: argocd
       serviceMonitor:
         enabled: true
       rules:
@@ -43,8 +47,6 @@ argo-cd:
     metrics:
       serviceMonitor:
         enabled: true
-    extraArgs:
-      - --insecure
     config:
       accounts.pipeline: apiKey
       resource.customizations: |
