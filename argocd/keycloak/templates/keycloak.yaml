@@ -9,3 +9,13 @@ metadata:
     app: sso
 spec:
   instances: 1
+  externalDatabase:
+    enabled: true
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: keycloak-db-secret
+type: Opaque
+stringData:
+  DB_VENDOR: h2
