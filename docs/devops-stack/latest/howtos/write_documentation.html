@@ -22,7 +22,7 @@
         <span></span>
         <span></span>
       </button>
-    </div>
+    </div>    
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
         <a class="navbar-item" href="https://github.com/camptocamp/devops-stack"><i class="fa fa-github-alt"></i>&nbsp;GitHub</a>
@@ -76,10 +76,31 @@
     <a class="nav-link" href="quickstart_aks.html">AKS</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="quickstart_ocp_ipi_aws.html">OpenShift (IPI) on AWS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="quickstart_k3s_docker.html">K3s on Docker</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="quickstart_k3s_libvirt.html">K3s on Libvirt</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Pipelines</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="pipelines.html">Deploying with Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="pipelines_gitlab.html">Create your GitLab Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="pipelines_github.html">Create your Github Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="pipelines_terraform_resource_migration.html">Operating terraform state using Pipeline</a>
   </li>
 </ul>
   </li>
@@ -104,6 +125,9 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">References</span>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../references/architecture.html">Architecture</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../references/authentication.html">Authentication</a>
   </li>
@@ -136,7 +160,7 @@
     <a class="nav-link" href="#ROOT:references/applications.adoc">Applications</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="#ROOT:references/applications/app.adoc">Umbrella App</a>
+    <a class="nav-link" href="../references/applications/apps.html">Umbrella App</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../references/applications/app-of-apps.html">App of Apps</a>
@@ -357,6 +381,11 @@ The environment variables FORCE_SHOW_EDIT_PAGE and CI are only needed if you wan
 <footer class="footer">
   <p>Copyright © Camptocamp 2021 — All Rights Reserved.</p>
 </footer>
+<script>
+  window.antora = window.antora || {}
+  window.antora.basePath = '../../..'
+  window.antora.pagePath = '/devops-stack/latest/howtos/write_documentation.html'
+</script>
 <script src="../../../_/js/site.js"></script>
 <script async src="../../../_/js/vendor/terraform.js"></script>
 <script async src="../../../_/js/vendor/highlight.js"></script>

@@ -22,7 +22,7 @@
         <span></span>
         <span></span>
       </button>
-    </div>
+    </div>    
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
         <a class="navbar-item" href="https://github.com/camptocamp/devops-stack"><i class="fa fa-github-alt"></i>&nbsp;GitHub</a>
@@ -76,10 +76,31 @@
     <a class="nav-link" href="../../howtos/quickstart_aks.html">AKS</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../howtos/quickstart_ocp_ipi_aws.html">OpenShift (IPI) on AWS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../howtos/quickstart_k3s_docker.html">K3s on Docker</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../../howtos/quickstart_k3s_libvirt.html">K3s on Libvirt</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Pipelines</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../howtos/pipelines.html">Deploying with Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../howtos/pipelines_gitlab.html">Create your GitLab Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../howtos/pipelines_github.html">Create your Github Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../howtos/pipelines_terraform_resource_migration.html">Operating terraform state using Pipeline</a>
   </li>
 </ul>
   </li>
@@ -104,6 +125,9 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">References</span>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../architecture.html">Architecture</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../authentication.html">Authentication</a>
   </li>
@@ -135,8 +159,8 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="#ROOT:references/applications.adoc">Applications</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="#ROOT:references/applications/app.adoc">Umbrella App</a>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="apps.html">Umbrella App</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="app-of-apps.html">App of Apps</a>
@@ -245,7 +269,9 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../../index.html">DevOps Stack</a></li>
-    <li><a href="apps.html">apps</a></li>
+    <li>References</li>
+    <li><a href="#ROOT:references/applications.adoc">Applications</a></li>
+    <li><a href="apps.html">Umbrella App</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/mcanevet/devops-stack/edit/master/docs/modules/ROOT/pages/references/applications/apps.adoc"><i class="fa fa-github-alt"></i>&nbsp;Edit this Page</a></div>
@@ -256,7 +282,40 @@
 </aside>
 <article class="doc">
 <h1 class="page">apps</h1>
-
+<div class="paragraph">
+<p>This chart is a composition of subcharts. Each of the subcharts installs
+one app of the <code>argocd/app-of-apps</code> (if parameterized as <code>enabled</code>).</p>
+</div>
+<div class="paragraph">
+<p>The following is a non-comprehensive list of the apps included:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>argocd</p>
+</li>
+<li>
+<p>cert-manager</p>
+</li>
+<li>
+<p>loki-stack</p>
+</li>
+<li>
+<p>kube-prometheus-stack</p>
+</li>
+<li>
+<p>minio</p>
+</li>
+<li>
+<p>keycloak</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Some of the apps are automatically disabled based on the type of cloud
+platform used. To enable/disable apps please see
+<a href="#ROOT:howtos/user_parameters.adoc" class="page unresolved">User Parameters</a></p>
+</div>
 </article>
   </div>
 </main>
@@ -264,6 +323,11 @@
 <footer class="footer">
   <p>Copyright © Camptocamp 2021 — All Rights Reserved.</p>
 </footer>
+<script>
+  window.antora = window.antora || {}
+  window.antora.basePath = '../../../..'
+  window.antora.pagePath = '/devops-stack/latest/references/applications/apps.html'
+</script>
 <script src="../../../../_/js/site.js"></script>
 <script async src="../../../../_/js/vendor/terraform.js"></script>
 <script async src="../../../../_/js/vendor/highlight.js"></script>

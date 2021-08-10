@@ -22,7 +22,7 @@
         <span></span>
         <span></span>
       </button>
-    </div>
+    </div>    
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
         <a class="navbar-item" href="https://github.com/camptocamp/devops-stack"><i class="fa fa-github-alt"></i>&nbsp;GitHub</a>
@@ -76,10 +76,31 @@
     <a class="nav-link" href="quickstart_aks.html">AKS</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="quickstart_ocp_ipi_aws.html">OpenShift (IPI) on AWS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="quickstart_k3s_docker.html">K3s on Docker</a>
   </li>
   <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="quickstart_k3s_libvirt.html">K3s on Libvirt</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Pipelines</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="pipelines.html">Deploying with Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="pipelines_gitlab.html">Create your GitLab Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="pipelines_github.html">Create your Github Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="pipelines_terraform_resource_migration.html">Operating terraform state using Pipeline</a>
   </li>
 </ul>
   </li>
@@ -104,6 +125,9 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">References</span>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../references/architecture.html">Architecture</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../references/authentication.html">Authentication</a>
   </li>
@@ -136,7 +160,7 @@
     <a class="nav-link" href="#ROOT:references/applications.adoc">Applications</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="#ROOT:references/applications/app.adoc">Umbrella App</a>
+    <a class="nav-link" href="../references/applications/apps.html">Umbrella App</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../references/applications/app-of-apps.html">App of Apps</a>
@@ -300,6 +324,12 @@ mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terrafor
 <li>
 <p>Knowledge of <a href="https://terraform.io">Terraform</a> basics</p>
 </li>
+<li>
+<p><code>jq</code> binary</p>
+</li>
+<li>
+<p><a href="https://argoproj.github.io/argo-cd/cli_installation/">argocd</a> CLI</p>
+</li>
 </ul>
 </div>
 </div>
@@ -315,7 +345,9 @@ mv terraform-provider-libvirt ~/.local/share/terraform/plugins/registry.terrafor
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl">module "cluster" {
+<pre class="highlightjs highlight"><code class="language-hcl hljs" data-lang="hcl"># terraform/main.tf
+
+module "cluster" {
   source = "git::https://github.com/camptocamp/devops-stack.git//modules/k3s/libvirt?ref=master"
 
   cluster_name = "my-cluster"
@@ -461,7 +493,7 @@ and login details in Keycloak.
 <h2 id="_reference"><a class="anchor" href="#_reference"></a>Reference</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>See the <a href="#ROOT:references/terraform_modules/k3s_libvirt.adoc" class="page unresolved">K3s Libvirt reference page</a>.</p>
+<p>See the <a href="../references/terraform_modules/k3s/libvirt.html" class="page">K3s Libvirt reference page</a>.</p>
 </div>
 </div>
 </div>
@@ -472,6 +504,11 @@ and login details in Keycloak.
 <footer class="footer">
   <p>Copyright © Camptocamp 2021 — All Rights Reserved.</p>
 </footer>
+<script>
+  window.antora = window.antora || {}
+  window.antora.basePath = '../../..'
+  window.antora.pagePath = '/devops-stack/latest/howtos/quickstart_k3s_libvirt.html'
+</script>
 <script src="../../../_/js/site.js"></script>
 <script async src="../../../_/js/vendor/terraform.js"></script>
 <script async src="../../../_/js/vendor/highlight.js"></script>
