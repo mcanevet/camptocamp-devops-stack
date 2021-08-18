@@ -7,6 +7,19 @@ module "cluster" {
   repo_url        = var.repo_url
   target_revision = var.target_revision
 
+  extra_namespaces = [
+    {
+      metadata = {
+        name = "foo"
+      }
+    },
+    {
+      metadata = {
+        name = "bar"
+      }
+    },
+  ]
+
   extra_app_projects = [
     {
       metadata = {

@@ -21,6 +21,12 @@ variable "app_of_apps_values_overrides" {
   default     = ""
 }
 
+variable "extra_namespaces" {
+  description = "Extra Namespaces to deploy."
+  type        = list(any)
+  default     = []
+}
+
 variable "extra_apps" {
   description = "Extra Applications objects to deploy."
   type        = list(any)

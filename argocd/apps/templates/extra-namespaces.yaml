@@ -1,0 +1,9 @@
+{{- range .Values.extraNamespaces }}
+---
+apiVersion: "v1"
+kind: "Namespace"
+metadata:
+  {{- .metadata | toYaml | nindent 2 }}
+spec:
+  {{- .spec | toYaml | nindent 2 }}
+{{- end }}

@@ -90,6 +90,7 @@ module "argocd" {
   kubeconfig              = local.kubeconfig
   repo_url                = var.repo_url
   target_revision         = var.target_revision
+  extra_namespaces        = var.extra_namespaces
   extra_apps              = var.extra_apps
   extra_app_projects      = var.extra_app_projects
   extra_application_sets  = var.extra_application_sets

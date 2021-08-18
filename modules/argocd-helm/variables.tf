@@ -13,6 +13,12 @@ variable "target_revision" {
   type        = string
 }
 
+variable "extra_namespaces" {
+  description = "Extra Namespaces to deploy."
+  type        = list(any)
+  default     = []
+}
+
 variable "extra_apps" {
   description = "Extra Applications objects to deploy."
   type        = list(any)

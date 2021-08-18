@@ -25,6 +25,7 @@ locals {
     target_revision                 = var.target_revision
     argocd_accounts_pipeline_tokens = local.argocd_accounts_pipeline_tokens
     argocd_server_secretkey         = local.argocd_server_secretkey
+    extra_namespaces                = var.extra_namespaces
     extra_apps                      = var.extra_apps
     extra_app_projects              = var.extra_app_projects
     extra_application_sets          = var.extra_application_sets

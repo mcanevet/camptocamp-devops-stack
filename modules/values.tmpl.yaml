@@ -48,6 +48,7 @@ apps:
   cluster-autoscaler:
     enabled: ${cluster_autoscaler.enable}
 
+${yamlencode({"extraNamespaces": extra_namespaces})}
 ${yamlencode({"extraApps": extra_apps})}
 ${yamlencode({"extraAppProjects": extra_app_projects})}
 ${yamlencode({"extraApplicationSets": extra_application_sets})}
