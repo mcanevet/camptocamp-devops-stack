@@ -100,6 +100,16 @@ argo-cd:
             hs = {}
             hs.status = "Healthy"
             return hs
+        keycloak.org/Keycloak:
+          health.lua: |
+            hs = {}
+            hs.status = "Progressing"
+            if obj.status ~= nil then
+              if obj.status.ready == true then
+                hs.status = "Healthy"
+              end
+            end
+            return hs
       configManagementPlugins: |
         - name: kustomized-helm
           init:
